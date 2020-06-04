@@ -1,11 +1,22 @@
 import React from 'react';
-import { StyledLayout, StyledWrapper } from './App.styles';
+import { Route, Router } from 'react-router';
+import { createBrowserHistory } from 'history';
+import { StyledLayout, StyledContent } from './App.styles';
+import CitiesGrid from './components/CitiesGrid';
+import DetailedPage from './components/DetailedPage';
+
+const history = createBrowserHistory();
 
 function App() {
   return (
-    <StyledWrapper>
-      <StyledLayout />
-    </StyledWrapper>
+    <StyledLayout>
+      <StyledContent>
+        <Router history={history}>
+          <Route path="/" component={CitiesGrid} exact />
+          <Route path="/:cityName" component={DetailedPage} />
+        </Router>
+      </StyledContent>
+    </StyledLayout>
   );
 }
 
