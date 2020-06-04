@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Input, notification, Spin } from 'antd';
+import {
+  Button, Input, notification, Spin,
+} from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   EmptyStyledCard,
-  StyledAddButton,
   StyledCloseButton,
   StyledCloseIcon,
   StyledSearchIcon,
@@ -25,8 +26,8 @@ const EmptyCityCard = () => {
     setIsLoading(!isLoading);
     getCityWeatherByName(cityInputValue)
       .then((result) => {
-        const cityIdsJson = localStorage.getItem('cityIds');
-        const cityIds = cityIdsJson ? JSON.parse(cityIdsJson) : [];
+        const cityIdsJson = localStorage.getItem('cityIds') || '[]';
+        const cityIds = JSON.parse(cityIdsJson);
         if (cityIds.indexOf(result.id) !== -1) {
           return notification.info({
             message: `City ${result.name} is already in list`,
@@ -37,7 +38,9 @@ const EmptyCityCard = () => {
         dispatch(setCityList(modifiedCityList));
         const editedIds = JSON.stringify([...cityIds, result.id]);
         localStorage.setItem('cityIds', editedIds);
-        return notification.success({ message: `City ${result.name} was added` });
+        return notification.success({
+          message: `City ${result.name} was added`,
+        });
       })
       .catch(() => notification.error({ message: 'City is not found' }))
       .finally(() => {
@@ -66,7 +69,7 @@ const EmptyCityCard = () => {
           </>
         ) : (
           <>
-            <StyledAddButton
+            <Button
               type="dashed"
               icon={<PlusOutlined />}
               onClick={switchTypingEnabled}

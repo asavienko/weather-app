@@ -40,13 +40,15 @@ const InfoCityCard = ({ cityData, id: currentId }) => {
       .finally(() => setIsLoading(false));
   };
   const formatTemp = (currentTemp) => {
-    if (currentTemp.toFixed() > 0) {
-      return `+${currentTemp}`;
+    const fixedCurrentTemp = currentTemp.toFixed();
+
+    if (fixedCurrentTemp > 0) {
+      return `+${fixedCurrentTemp}`;
     }
-    if (currentTemp.toFixed() < 0) {
-      return `-${currentTemp}`;
+    if (fixedCurrentTemp < 0) {
+      return `-${fixedCurrentTemp}`;
     }
-    return currentTemp.toFixed();
+    return fixedCurrentTemp;
   };
   return (
     <StyledCard

@@ -48,9 +48,6 @@ export const StyledSearchIcon = styled(SearchOutlined)`
   font-size: 16px;
   color: #1890ff;
 `;
-export const StyledAddButton = styled(Button)`
-  size: 20px;
-`;
 
 export const StyledTempSpan = styled.span`
   font-size: 80px;

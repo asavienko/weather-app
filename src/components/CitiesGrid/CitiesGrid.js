@@ -23,7 +23,7 @@ const CitiesGrid = () => {
 
     setIsLoading(!isLoading);
     Promise.all(localIds.map((id) => getCityWeatherById(id)))
-      .then((res) => dispatch(setCityList([...res, { id: 0 }])))
+      .then((res) => dispatch(setCityList([...res, ...cityList])))
       .finally(() => setIsLoading(false));
   }, [dispatch]);
   return (
