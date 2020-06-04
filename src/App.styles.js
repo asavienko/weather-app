@@ -1,13 +1,11 @@
 import styled from 'styled-components';
+import { Layout } from 'antd';
 
-export const StyledWrapper = styled.div`
-  background: #f0f2f5;
+export const StyledContent = styled(Layout.Content)`
   height: 100%;
-  padding: 50px;
-  box-sizing: border-box;
 `;
 
-export const StyledLayout = styled.div`
-  background: #fff;
-  height: 100%;
+export const StyledLayout = styled(Layout)`
+  min-height: 100%;
+  padding: 20px;
 `;
