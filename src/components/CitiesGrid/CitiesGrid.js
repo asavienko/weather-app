@@ -25,7 +25,7 @@ const CitiesGrid = () => {
     Promise.all(localIds.map((id) => getCityWeatherById(id)))
       .then((res) => dispatch(setCityList([...res, ...cityList])))
       .finally(() => setIsLoading(false));
-  }, [dispatch]);
+  }, [dispatch, cityList]);
   return (
     <Spin spinning={isLoading} tip="Loading...">
       <StyledRow gutter={[16, 16]}>

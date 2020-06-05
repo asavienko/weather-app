@@ -30,7 +30,7 @@ const EmptyCityCard = () => {
         const cityIds = JSON.parse(cityIdsJson);
         if (cityIds.indexOf(result.id) !== -1) {
           return notification.info({
-            message: `City ${result.name} is already in list`,
+            message: `City ${result.name} is already in list`, placement: 'bottomLeft',
           });
         }
         const modifiedCityList = [...cityList];

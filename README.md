@@ -1,3 +1,23 @@
+Running application:
+Starting node server npm run npm run server
+
+Running development server npm run start
+
+Front-end documentation:
+.style.js - extension keeps styles for styled-components
+
+fetchUtils.js - contains fetch reusable functions
+
+utils/index.js - contains util functions
+
+toFloatNumber() - changes number to string with two digits after dot( 0 => "0.00")
+
+calculatePrice() - returns calculated price and discount price based on takenDate and pricePerHour
+
+excludeChosenItem() - callback function for filter. Returns array without chosen Id.
+
+reduceBikePrice() - generates total discount price and total price for array of bikes
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

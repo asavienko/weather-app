@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { StyledCard, StyledCol, StyledTempSpan } from './CitiesGrid.styles';
 import { setCityList } from '../../actions/cityActions';
 import { getCityWeatherById } from '../../servises/weatherServices';
+import { formatTemp } from '../utiles/utils';
 
 const InfoCityCard = ({ cityData, id: currentId }) => {
   const {
@@ -39,17 +40,7 @@ const InfoCityCard = ({ cityData, id: currentId }) => {
       .catch(() => notification.error({ message: 'Some error has occur' }))
       .finally(() => setIsLoading(false));
   };
-  const formatTemp = (currentTemp) => {
-    const fixedCurrentTemp = currentTemp.toFixed();
 
-    if (fixedCurrentTemp > 0) {
-      return `+${fixedCurrentTemp}`;
-    }
-    if (fixedCurrentTemp < 0) {
-      return `-${fixedCurrentTemp}`;
-    }
-    return fixedCurrentTemp;
-  };
   return (
     <StyledCard
       title={name}
@@ -59,7 +50,7 @@ const InfoCityCard = ({ cityData, id: currentId }) => {
       ]}
     >
       <Spin spinning={isLoading} size="large">
-        <Link to={`/${name}`}>
+        <Link to={`city/${name}`}>
           <Row justify="center" align="middle">
             <StyledCol span={12}>
               <img
