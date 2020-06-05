@@ -10,7 +10,7 @@ import {
   StyledCloseIcon,
   StyledSearchIcon,
 } from './CitiesGrid.styles';
-import { getCityWeatherByName } from '../../servises/weatherServices';
+import { getCityWeatherByName } from '../../services/weatherServices';
 import { setCityList } from '../../actions/cityActions';
 
 const EmptyCityCard = () => {
@@ -31,6 +31,7 @@ const EmptyCityCard = () => {
         if (cityIds.indexOf(result.id) !== -1) {
           return notification.info({
             message: `City ${result.name} is already in list`,
+            placement: 'bottomLeft',
           });
         }
         const modifiedCityList = [...cityList];
@@ -40,9 +41,13 @@ const EmptyCityCard = () => {
         localStorage.setItem('cityIds', editedIds);
         return notification.success({
           message: `City ${result.name} was added`,
+          placement: 'bottomLeft',
         });
       })
-      .catch(() => notification.error({ message: 'City is not found' }))
+      .catch(() => notification.error({
+        message: 'City is not found',
+        placement: 'bottomLeft',
+      }))
       .finally(() => {
         setIsLoading(false);
         switchTypingEnabled();

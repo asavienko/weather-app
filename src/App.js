@@ -1,22 +1,24 @@
 import React from 'react';
-import { Route, Router } from 'react-router';
+import { Route, Router, Switch } from 'react-router';
 import { createBrowserHistory } from 'history';
-import { StyledLayout, StyledContent } from './App.styles';
+import { StyledContent } from './App.styles';
 import CitiesGrid from './components/CitiesGrid';
 import DetailedPage from './components/DetailedPage';
+import NotFoundPage from './components/NotFoundPage';
 
 const history = createBrowserHistory();
 
 function App() {
   return (
-    <StyledLayout>
-      <StyledContent>
-        <Router history={history}>
+    <StyledContent>
+      <Router history={history}>
+        <Switch>
           <Route path="/" component={CitiesGrid} exact />
-          <Route path="/:cityName" component={DetailedPage} />
-        </Router>
-      </StyledContent>
-    </StyledLayout>
+          <Route path="/city/:cityName" component={DetailedPage} />
+          <Route path="*" component={NotFoundPage} exact />
+        </Switch>
+      </Router>
+    </StyledContent>
   );
 }
 

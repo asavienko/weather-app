@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Col, Spin } from 'antd';
 import EmptyCityCard from './EmptyCityCard';
 import { StyledRow } from './CitiesGrid.styles';
-import { getCityWeatherById } from '../../servises/weatherServices';
+import { getCityWeatherById } from '../../services/weatherServices';
 import { setCityList } from '../../actions/cityActions';
 import InfoCityCard from './InfoCityCard';
 
@@ -25,7 +25,7 @@ const CitiesGrid = () => {
     Promise.all(localIds.map((id) => getCityWeatherById(id)))
       .then((res) => dispatch(setCityList([...res, ...cityList])))
       .finally(() => setIsLoading(false));
-  }, [dispatch]);
+  }, [dispatch, cityList]);
   return (
     <Spin spinning={isLoading} tip="Loading...">
       <StyledRow gutter={[16, 16]}>
