@@ -13,14 +13,14 @@ export const StyledCard = styled(Card)`
 `;
 
 export const StyledLeftCard = styled(Card.Grid)`
-  width: 25%;
+  width: 22%;
   display: flex;
   flex-direction: column;
   height: 298px;
   justify-content: space-between;
 `;
 export const StyledRightCard = styled(Card.Grid)`
-  width: 75%;
+  width: 78%;
 `;
 
 export const StyledIconWrapper = styled.div`
