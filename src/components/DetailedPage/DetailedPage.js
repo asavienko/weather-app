@@ -20,7 +20,7 @@ import {
   StyledRightCard,
   StyledWrapper,
 } from './DetailedPage.styles';
-import { formatTemp } from '../../untiles/untiles';
+import { formatTemp } from '../../utils/utils';
 
 const { Title } = Typography;
 
@@ -92,69 +92,76 @@ const DetailedPage = () => {
   };
 
   return (
-    <Spin spinning={isLoading} tip="Loading...">
+    <>
       <StyledWrapper>
-        <Title>
-          {`${cityName}, ${getWeatherParam('country')}, ${getWeatherParam(
-            'dt',
-          )}`}
-        </Title>
-        <StyledCard>
-          <StyledLeftCard hoverable={false}>
-            <StyledIconWrapper>
-              <img
-                src={`http://openweathermap.org/img/wn/${getWeatherParam(
-                  'icon',
-                )}.png`}
-                alt="icon"
-              />
-              <StyledLargeSpan level={4}>
-                {getWeatherParam('main')}
-              </StyledLargeSpan>
-            </StyledIconWrapper>
-            <StyledMediumSpan>
-              {`Temperature:   ${getWeatherParam('temp')}`}
-            </StyledMediumSpan>
-            <StyledMediumSpan>
-              {`Feels like:   ${getWeatherParam('feels_like')}`}
-            </StyledMediumSpan>
-            <StyledMediumSpan>
-              {`Pressure: ${getWeatherParam('pressure')}`}
-            </StyledMediumSpan>
-            <StyledMediumSpan>
-              {`Sunset: ${getWeatherParam('sunset')}`}
-            </StyledMediumSpan>
-            <StyledMediumSpan>
-              {`Sunrise: ${getWeatherParam('sunrise')}`}
-            </StyledMediumSpan>
-          </StyledLeftCard>
-          <StyledRightCard hoverable={false}>
-            <LineChart data={dailyCityForecast} width={600} height={250}>
-              <Line type="monotone" dataKey="temp" stroke="#8884d8" />
-              <Tooltip
-                content={({ payload, label }) => (
-                  <div className="custom-tooltip">
-                    <p className="label">
-                      {`${label}: ${payload[0]
-                        && formatTemp(payload[0].value)}`}
-                    </p>
-                  </div>
-                )}
-              />
-              <XAxis dataKey="date" />
-              <YAxis />
-            </LineChart>
-          </StyledRightCard>
-        </StyledCard>
+        {isLoading ? (
+          <Spin spinning={isLoading} tip="Loading..." size="large" />
+        ) : (
+          <>
+            <Title>
+              {`${cityName}, ${getWeatherParam('country')}, ${getWeatherParam(
+                'dt',
+              )}`}
+            </Title>
+            <StyledCard>
+              <StyledLeftCard hoverable={false}>
+                <StyledIconWrapper>
+                  <img
+                    src={`http://openweathermap.org/img/wn/${getWeatherParam(
+                      'icon',
+                    )}.png`}
+                    alt="icon"
+                  />
+                  <StyledLargeSpan level={4}>
+                    {getWeatherParam('main')}
+                  </StyledLargeSpan>
+                </StyledIconWrapper>
+                <StyledMediumSpan>
+                  {`Temperature:   ${getWeatherParam('temp')}`}
+                </StyledMediumSpan>
+                <StyledMediumSpan>
+                  {`Feels like:   ${getWeatherParam('feels_like')}`}
+                </StyledMediumSpan>
+                <StyledMediumSpan>
+                  {`Pressure: ${getWeatherParam('pressure')}`}
+                </StyledMediumSpan>
+                <StyledMediumSpan>
+                  {`Sunset: ${getWeatherParam('sunset')}`}
+                </StyledMediumSpan>
+                <StyledMediumSpan>
+                  {`Sunrise: ${getWeatherParam('sunrise')}`}
+                </StyledMediumSpan>
+              </StyledLeftCard>
+              <StyledRightCard hoverable={false}>
+                <LineChart data={dailyCityForecast} width={600} height={250}>
+                  <Line type="monotone" dataKey="temp" stroke="#8884d8" />
+                  <Tooltip
+                    content={({ payload, label }) => (
+                      <div className="custom-tooltip">
+                        <p className="label">
+                          {`${label}: ${payload[0]
+                            && formatTemp(payload[0].value)}`}
+                        </p>
+                      </div>
+                    )}
+                  />
+                  <XAxis dataKey="date" />
+                  <YAxis />
+                </LineChart>
+              </StyledRightCard>
+            </StyledCard>
+          </>
+        )}
       </StyledWrapper>
-      <StyledBackButton size="large">
-        <Link to="/">
-          <ArrowLeftOutlined />
-          {' '}
-          Go home
-        </Link>
-      </StyledBackButton>
-    </Spin>
+      {!isLoading && (
+        <StyledBackButton size="large">
+          <Link to="/">
+            <ArrowLeftOutlined />
+            Go home
+          </Link>
+        </StyledBackButton>
+      )}
+    </>
   );
 };
 
