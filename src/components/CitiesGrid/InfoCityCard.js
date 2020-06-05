@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { StyledCard, StyledCol, StyledTempSpan } from './CitiesGrid.styles';
 import { setCityList } from '../../actions/cityActions';
 import { getCityWeatherById } from '../../services/weatherServices';
-import { formatTemp } from '../../untiles/untiles';
+import { formatTemp } from '../../utils/utils';
 
 const InfoCityCard = ({ cityData, id: currentId }) => {
   const {
