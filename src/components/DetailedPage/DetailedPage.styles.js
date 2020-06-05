@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Card } from 'antd';
+import { Button, Card } from 'antd';
 
 export const StyledWrapper = styled.div`
   display: flex;
@@ -35,4 +35,9 @@ export const StyledLargeSpan = styled.span`
 
 export const StyledMediumSpan = styled.span`
   font-size: 16px;
+`;
+
+export const StyledBackButton = styled(Button)`
+position: fixed;
+    bottom: 20px;
 `;

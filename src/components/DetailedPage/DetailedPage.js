@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Spin, Typography } from 'antd';
 import {
   Line, LineChart, Tooltip, XAxis, YAxis,
 } from 'recharts';
 import moment from 'moment';
+import { ArrowLeftOutlined } from '@ant-design/icons/lib/icons';
 import {
   getCityWeatherByName,
   getDailyForecast,
-} from '../../servises/weatherServices';
+} from '../../services/weatherServices';
 import {
+  StyledBackButton,
   StyledCard,
   StyledIconWrapper,
   StyledLargeSpan,
@@ -18,7 +20,7 @@ import {
   StyledRightCard,
   StyledWrapper,
 } from './DetailedPage.styles';
-import { formatTemp } from '../utiles/utils';
+import { formatTemp } from '../../untiles/untiles';
 
 const { Title } = Typography;
 
@@ -82,6 +84,9 @@ const DetailedPage = () => {
         .add(cityInfo.timezone, 's')
         .format('HH:mm');
     }
+    if (param === 'dt') {
+      return moment(cityInfo.dt * 1000).format('Do MMM');
+    }
 
     return '';
   };
@@ -89,7 +94,11 @@ const DetailedPage = () => {
   return (
     <Spin spinning={isLoading} tip="Loading...">
       <StyledWrapper>
-        <Title>{`${cityName}, ${getWeatherParam('country')}`}</Title>
+        <Title>
+          {`${cityName}, ${getWeatherParam('country')}, ${getWeatherParam(
+            'dt',
+          )}`}
+        </Title>
         <StyledCard>
           <StyledLeftCard hoverable={false}>
             <StyledIconWrapper>
@@ -138,6 +147,13 @@ const DetailedPage = () => {
           </StyledRightCard>
         </StyledCard>
       </StyledWrapper>
+      <StyledBackButton size="large">
+        <Link to="/">
+          <ArrowLeftOutlined />
+          {' '}
+          Go home
+        </Link>
+      </StyledBackButton>
     </Spin>
   );
 };

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Col, Spin } from 'antd';
 import EmptyCityCard from './EmptyCityCard';
 import { StyledRow } from './CitiesGrid.styles';
-import { getCityWeatherById } from '../../servises/weatherServices';
+import { getCityWeatherById } from '../../services/weatherServices';
 import { setCityList } from '../../actions/cityActions';
 import InfoCityCard from './InfoCityCard';
 

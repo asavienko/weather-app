@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { StyledCard, StyledCol, StyledTempSpan } from './CitiesGrid.styles';
 import { setCityList } from '../../actions/cityActions';
-import { getCityWeatherById } from '../../servises/weatherServices';
-import { formatTemp } from '../utiles/utils';
+import { getCityWeatherById } from '../../services/weatherServices';
+import { formatTemp } from '../../untiles/untiles';
 
 const InfoCityCard = ({ cityData, id: currentId }) => {
   const {
@@ -26,7 +26,10 @@ const InfoCityCard = ({ cityData, id: currentId }) => {
     const cityIds = JSON.parse(cityIdsJson);
     cityIds.splice(cityIds.indexOf(currentId), 1);
     localStorage.setItem('cityIds', JSON.stringify(cityIds));
-    notification.info({ message: `City ${name} deleted` });
+    notification.info({
+      message: `City ${name} deleted`,
+      placement: 'bottomLeft',
+    });
   };
 
   const onReload = () => {
@@ -37,7 +40,10 @@ const InfoCityCard = ({ cityData, id: currentId }) => {
         cityList.splice(indexInStore, 1, result);
         dispatch(setCityList(cityList));
       })
-      .catch(() => notification.error({ message: 'Some error has occur' }))
+      .catch(() => notification.error({
+        message: 'Some error has occur',
+        placement: 'bottomLeft',
+      }))
       .finally(() => setIsLoading(false));
   };
 
